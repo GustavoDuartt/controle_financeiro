@@ -1,23 +1,101 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ResumoFinanceiro from './Calc';
 import './App.css';
 
 function App() {
+  const [entradasSaidas, setEntradasSaidas] = useState([]);
+  const [descricao, setDescricao] = useState('');
+  const [valor, setValor] = useState('');
+  const [tipo, setTipo] = useState('');
+
+  const adicionarRegistro = () => {
+    if (descricao && valor && tipo) {
+      setEntradasSaidas([...entradasSaidas, { descricao, valor: Number(valor), tipo }]);
+      setDescricao('');
+      setValor('');
+      setTipo('');
+    }
+  };
+
+  const excluirRegistro = (index) => {
+    const novosRegistros = entradasSaidas.filter((_, i) => i !== index);
+    setEntradasSaidas(novosRegistros);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Controle financeiro</h1>
       </header>
+    
+      <ResumoFinanceiro entradasSaidas={entradasSaidas} />
+
+      <div className="form">
+        <label htmlFor="Desc">Descrição</label>
+        <input
+          id="Desc"
+          type="text"
+          value={descricao}
+          onChange={(e) => setDescricao(e.target.value)}
+        />
+
+        <label htmlFor="Valor">Valor</label>
+        <input
+          id="Valor"
+          type="number"
+          value={valor}
+          onChange={(e) => setValor(e.target.value)}
+        />
+
+        <div id="radios">
+          <input
+            type="radio"
+            name="EntradaSaida"
+            value="entrada"
+            id="Entrada"
+            checked={tipo === 'entrada'}
+            onChange={() => setTipo('entrada')}
+          />
+          <label>Entrada</label>
+        </div>
+
+        <div id="radios">
+          <input
+            type="radio"
+            name="EntradaSaida"
+            value="saida"
+            id="Saida"
+            checked={tipo === 'saida'}
+            onChange={() => setTipo('saida')}
+          />
+          <label>Saída</label>
+        </div>
+
+        <button onClick={adicionarRegistro}>ADICIONAR</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entradasSaidas.map((item, index) => (
+            <tr key={index}>
+              <td>{item.descricao}</td>
+              <td>{item.valor}</td>
+              <td>{item.tipo}</td>
+              <td>
+                <button id="excluir" onClick={() => excluirRegistro(index)}>Excluir</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
