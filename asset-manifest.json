@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/%7Bnome-do-repositorio%7D/static/css/main.334427db.css",
+    "main.js": "/%7Bnome-do-repositorio%7D/static/js/main.0741a12c.js",
+    "static/js/453.38ec973b.chunk.js": "/%7Bnome-do-repositorio%7D/static/js/453.38ec973b.chunk.js",
+    "index.html": "/%7Bnome-do-repositorio%7D/index.html",
+    "main.334427db.css.map": "/%7Bnome-do-repositorio%7D/static/css/main.334427db.css.map",
+    "main.0741a12c.js.map": "/%7Bnome-do-repositorio%7D/static/js/main.0741a12c.js.map",
+    "453.38ec973b.chunk.js.map": "/%7Bnome-do-repositorio%7D/static/js/453.38ec973b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.334427db.css",
+    "static/js/main.0741a12c.js"
+  ]
+}
