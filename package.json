@@ -1,7 +1,7 @@
 {
   "name": "projeto",
   "version": "0.1.0",
-  "homepage": "https://{username}.github.io/{nome-do-repositorio}",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
