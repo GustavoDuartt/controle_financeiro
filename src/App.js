@@ -7,6 +7,7 @@ function App() {
   const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
   const [tipo, setTipo] = useState('');
+  const [indexEdicao, setIndexEdicao] = useState(null);
 
   const adicionarRegistro = () => {
     if (descricao && valor && tipo) {
@@ -20,6 +21,30 @@ function App() {
   const excluirRegistro = (index) => {
     const novosRegistros = entradasSaidas.filter((_, i) => i !== index);
     setEntradasSaidas(novosRegistros);
+  };
+
+  const iniciarEdicao = (index) => {
+    const item = entradasSaidas[index];
+    setDescricao(item.descricao);
+    setValor(item.valor);
+    setTipo(item.tipo);
+    setIndexEdicao(index);
+  };
+
+  const atualizarRegistro = () => {
+    if (descricao && valor && indexEdicao !== null) {
+      const novosRegistros = entradasSaidas.map((item, i) => {
+        if (i === indexEdicao) {
+          return { ...item, descricao, valor: Number(valor), tipo };
+        }
+        return item;
+      });
+      setEntradasSaidas(novosRegistros);
+      setDescricao('');
+      setValor('');
+      setTipo('');
+      setIndexEdicao(null);
+    }
   };
 
   return (
@@ -88,9 +113,18 @@ function App() {
             <tr key={index}>
               <td>{item.descricao}</td>
               <td>{item.valor}</td>
-              <td>{item.tipo}</td>
+              <td className={item.tipo === 'entrada' ? 'entrada' : 'saida'}>{item.tipo}</td>
               <td>
-                <button id="excluir" onClick={() => excluirRegistro(index)}>Excluir</button>
+                {indexEdicao === index ? (
+                  <>
+                    <button onClick={atualizarRegistro}>Atualizar</button>
+                  </>
+                ) : (
+                  <>
+                    <button id="editar" onClick={() => iniciarEdicao(index)}>Editar</button>
+                    <button id="excluir" onClick={() => excluirRegistro(index)}>Excluir</button>
+                  </>
+                )}
               </td>
             </tr>
           ))}

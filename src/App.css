@@ -143,6 +143,12 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
+#editar {
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 #excluir {
   background-color: #dc3545;
   padding: 5px 10px;
@@ -162,6 +168,15 @@ tr:hover {
 @media (max-width: 768px) {
   th, td {
     max-width: fit-content;
+    padding: 5px;
+    white-space: normal; 
+    word-wrap: break-word; 
+    max-width: 200px; 
+  }
+
+  table {
+    table-layout: fixed; /* Define um layout fixo para a tabela */
+    width: 100%; /* Define a largura da tabela */
   }
 
   button {
@@ -220,4 +235,12 @@ tr:hover {
   button:hover {
     background-color: #0056b3;
   }
+}
+
+.entrada {
+  color: green;
+}
+
+.saida {
+  color: red;
 }
